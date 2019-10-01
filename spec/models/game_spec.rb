@@ -1,6 +1,6 @@
 require_relative '../../lib/game'
 
-describe '#Game' do
+describe 'Game' do
   let(:player_bob) {Player.new("Bob")}
   let(:player_steve) {Player.new("Steve")}
   let(:player_joe) {Player.new("Joe")}
@@ -43,8 +43,7 @@ describe '#Game' do
       game = Game.new
       player = Player.new('You')
       game.add_player(player)
-      current_arr = game.find_current_player(player)
-      current_player = current_arr.pop
+      current_player = game.find_current_player(player)
       expect(current_player.name).to eq 'You'
     end
   end

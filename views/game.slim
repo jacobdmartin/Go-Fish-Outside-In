@@ -11,7 +11,34 @@ section
             = "#{player.name} #{player.hand.count}"
   .flex.flex-row.result_message
   .flex.flex-row.personal-stats
-    .flex.flew-column.your-hand-column
-        p.your-info-header Your Cards
-    .flex.flew-column.your-matches-column
-        p.your-info-header Your Matches
+  .flex
+    .your-hand-column
+      p.your-info-header Your Cards
+  .flex
+    .your-hand
+      - current_player.hand.each do |card|
+        img.card_image src="/images/card_faces/#{card.image_name}.jpg" alt="#{card.alt_to_s}"
+  .flex
+    .your-matches-column
+      p.your-info-header Your Matches
+    .your-matches
+      - current_player.completed_matches.each do |card|
+        img.card_image src="/images/card_faces/#{card.image_name}.jpg" alt="#{card.alt_to_s}"
+  - if current_player == game.current_player.name
+    a.turn-button href="#turn-button" Take Turn
+    .overlay id="#turn-button"
+      .popup
+        h3 Select Card & Player
+        a.close href="#" &times;
+        .content
+          form action="/ask" method="post"
+            p Choose A Card To Ask For
+            - current_player.unique_ranks.each do |rank|
+              .card-item.card-btn
+                input.card-list-item type="radio" name="rank" value="#{rank}"
+                button.card-list-item type="submit" name="rank" value="#{rank}"
+            p Choose a Player To Ask
+            - current_player.name != player.name
+              .player-list-item.player-btn
+                input.player-list-item type="radio" name="player" value="#{player.name}" #{player.name}
+                button.ask-btn type="submit" Ask 

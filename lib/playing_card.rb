@@ -16,4 +16,16 @@ class PlayingCard
     return 14 if rank == "Ace"
     rank.to_i
   end
+
+  def image_name
+    rank == "10" ? "#{rank}#{suit[0]}" : "#{rank[0]}#{suit[0]}"
+  end
+
+  def to_s
+    "/images/card_faces/#{image_name}"
+  end
+
+  def alt_to_s
+    "#{rank} of #{suit}"
+  end
 end

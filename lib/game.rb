@@ -9,7 +9,7 @@ class Game
     @started = false
     @card_deck = CardDeck.new
     @players = []
-    @current_player = players[0]
+    @current_player = nil
   end
 
   def create_cpu(cpu_number)
@@ -21,14 +21,17 @@ class Game
   def add_player(player)
     players << player
     start
+    self.current_player = players[0]
   end
 
   def empty?
     players.empty?
   end
 
-  def find_current_player(player_name)
-    players.each {|player| return player if player.name == player_name}
+  def find_current_player(player)
+    players.each do |player| 
+      return player if player.name == player.name
+    end
   end
 
   def deal

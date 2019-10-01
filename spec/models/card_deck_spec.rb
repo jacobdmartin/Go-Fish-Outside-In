@@ -1,6 +1,6 @@
 require_relative '../../lib/card_deck'
 
-describe '#CardDeck' do
+describe 'CardDeck' do
 
   describe '#shuffle' do
     it 'shuffles the deck' do

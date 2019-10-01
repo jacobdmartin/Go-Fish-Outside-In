@@ -50,10 +50,25 @@ RSpec.describe Server do
     expect(page).to have_css("[data-test-id='player-bot1']", text: "7")
   end
 
-  it 'displays current players hand and matches' do
+  it 'displays current players hand and matches header' do
     visit '/'
     click_on '2'
     expect(page).to have_css(".your-hand-column", text: "Your Cards")
     expect(page).to have_css(".your-matches-column", text: "Your Matches")
+  end
+
+  it 'displays current players hand and matches' do
+    visit '/'
+    click_on '2'
+    expect(page).to have_css(".your-hand")
+    expect(page).to have_css(".your-matches")
+    expect(page).to have_css(".turn-button")
+  end
+
+  it 'displays a button that says it is your turn and they click in' do
+    start_game_with_two_cpus
+    click_on 'Take Turn'
+    expect(page).to have_css(".card-list-item")
+    expect(page).to have_css(".player-list-item")
   end
 end
