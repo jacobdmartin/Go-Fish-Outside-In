@@ -7,6 +7,9 @@ gem 'sprockets'
 gem 'sass'
 gem 'pry'
 gem 'shotgun'
+gem 'selenium-webdriver'
+gem 'webdrivers', '~> 4.0'
+gem 'pusher'
 
 group :test do
   gem 'rspec'

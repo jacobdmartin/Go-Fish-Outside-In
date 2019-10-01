@@ -1,0 +1,11 @@
+section
+  .flex.enter-header
+    p.flex.enter-header-text Game
+  .flex.flex-row
+    ul.player-list
+      - game.players.each do |player|
+        li.flex.player__box.player__list--text
+          - if current_player.name == player.name
+            b = "#{player.name} #{player.hand.count}"
+          - else
+            = "#{player.name} #{player.hand.count}"

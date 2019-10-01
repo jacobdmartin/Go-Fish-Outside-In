@@ -1,0 +1,39 @@
+.result_message {
+  max-width: 75%;
+  height: 70px;
+  border-radius: 20px;
+  padding-left: 7px;
+  position: relative;
+  left: 12.5%;
+  background-color: #ffda55;
+  border: 2px #553d03 solid;
+  align-items: center;
+}
+
+.welcome {
+  position: relative;
+  top: 70%;
+  margin: auto;
+  margin-top: 45px;
+  color: black;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.cpu-number {
+  position: relative;
+  margin: auto;
+  margin-top: 45px;
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.player__list--text {
+  color: black;
+  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+}
+
+.player__list--text:hover .dropdown{background-color: #d8d8d8}
