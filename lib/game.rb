@@ -20,6 +20,7 @@ class Game
 
   def add_player(player)
     players << player
+    start
   end
 
   def empty?
@@ -40,10 +41,13 @@ class Game
     players.count > 2 ? 5:7
   end
 
-  def start 
-    self.started = true
-    deal_count
-    deal
+  def start
+    if players.count > 1
+      self.started = true
+      card_deck.shuffle
+      deal_count
+      deal
+    end
   end
 end
 

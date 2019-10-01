@@ -4,8 +4,14 @@ section
   .flex.flex-row
     ul.player-list
       - game.players.each do |player|
-        li.flex.player__box.player__list--text
+        li.flex.player__box.player__list--text data-test-id="player-bot1"
           - if current_player.name == player.name
             b = "#{player.name} #{player.hand.count}"
           - else
             = "#{player.name} #{player.hand.count}"
+  .flex.flex-row.result_message
+  .flex.flex-row.personal-stats
+    .flex.flew-column.your-hand-column
+        p.your-info-header Your Cards
+    .flex.flew-column.your-matches-column
+        p.your-info-header Your Matches

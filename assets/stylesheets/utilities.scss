@@ -70,14 +70,19 @@ container {
   box-shadow: 4px 4px 4px rgb(34, 34, 34);
 }
 
-.hand-column {
+.your-hand-column {
+  width: 50%;
   background-color: black;
   justify-content: center;
 }
 
-.book-column {
-  width: 45%;
+.your-matches-column {
+  width: 50%;
   background-color: white;
+}
+
+.personal-stats {
+  margin-top: 10px;
 }
 
 .card-box {

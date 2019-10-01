@@ -15,6 +15,11 @@ RSpec.describe Server do
   let(:button_five) {find('#five')}
   let(:start_button) {find('#start')}
 
+  def start_game_with_two_cpus
+    visit '/'
+    click_on '2'
+  end
+
   include Capybara::DSL 
   before do
     Capybara.app = Server.new
@@ -24,17 +29,31 @@ RSpec.describe Server do
     Server.clear_game
   end
 
-  it "logs in to a page with two cpu\'s" do
+  it "logs in to a page with two players" do
     visit '/'
     click_on '1'
-    expect(page).to have_css('.player__list--text')
+    expect(page).to have_css('.player__list--text', count:2)
+    expect(page).to have_content('You')
+  end
+
+  it "logs in to a page with four players" do
+    visit '/'
+    click_on '3'
+    expect(page).to have_css('.player__list--text', count:4)
     expect(page).to have_content('You')
   end
 
   it 'distributes cards based on number of players' do
     visit '/'
     click_on '1'
-    expect(page).to have_css('.card__number')
-    expect(page).to have_content('7')
+    expect(page).to have_css("[data-test-id='player-bot1']")
+    expect(page).to have_css("[data-test-id='player-bot1']", text: "7")
+  end
+
+  it 'displays current players hand and matches' do
+    visit '/'
+    click_on '2'
+    expect(page).to have_css(".your-hand-column", text: "Your Cards")
+    expect(page).to have_css(".your-matches-column", text: "Your Matches")
   end
 end

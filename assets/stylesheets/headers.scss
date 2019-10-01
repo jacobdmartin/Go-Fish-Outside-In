@@ -28,13 +28,17 @@
   width: 100%;
 }
 
-.matches-header {
-  height: 30px;
+.your-info-header {
+  height: 35px;
+  width: 100%;
   background-color: #483302;
+  border: 1px solid black;
   box-shadow: 4px 4px 4px rgb(34, 34, 34);
   margin: 0px;
   text-align: center;
+  padding-top: 15px;
   color: white;
+  font-weight: bold;
 }
 
 .log_in {

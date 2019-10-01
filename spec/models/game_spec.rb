@@ -52,7 +52,9 @@ describe '#Game' do
   describe '#deal' do
     it 'deals the deck' do
       game = Game.new
-      game.deal
+      game.add_player(player_bob)
+      game.add_player(player_joe)
+      expect(game.players[0].hand.count).to eq 7
     end
   end
 
@@ -80,16 +82,17 @@ describe '#Game' do
   describe '#start' do
     it 'expects players to have cards because the game has started' do
       game = Game.new
-      player = Player.new("John")
-      game.add_player(player)
-      game.start
-      expect(player.hand.count).to eq 7
+      game.add_player(player_joe)
+      game.add_player(player_steve)
+      expect(game.players[0].hand.count).to eq 7
       expect(game.started).to eq true
     end
 
     it 'expects players to have no cards because the game hasn\'t started' do
       game = Game.new
       player = Player.new("Obediah")
+      game.add_player(player)
+      expect(game.players[0].hand.count).to eq 0
     end
   end
 end
