@@ -36,4 +36,16 @@ describe 'Player' do
       expect(player_grace.has_rank?("8")).to eq false
     end
   end
+
+  describe '#remove_cards_from_hand' do
+    it 'removes the card from the players hand' do
+      
+    end
+  end
+
+  describe '#count_matches' do
+    it 'looks at the number of each rank in a players hand to see if they have any matches' do
+
+    end
+  end
 end
