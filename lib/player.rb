@@ -14,4 +14,16 @@ class Player
   def unique_ranks
     @hand.map(&:rank).uniq
   end
+
+  def has_rank?(rank)
+    hand.map(&:rank).include?(rank)
+  end
+
+  def remove_cards_from_hand(rank)
+
+  end
+
+  def count_matches(new_card)
+
+  end
 end

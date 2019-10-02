@@ -1,5 +1,6 @@
 require_relative 'card_deck'
 require_relative 'player'
+require_relative 'cpu'
 
 class Game
   attr_reader :card_deck
@@ -16,12 +17,12 @@ class Game
     cpu_number.times do |index| 
       players << CPU.new("CPU#{index + 1}")
     end
+    start
+    self.current_player = players[0]
   end
 
   def add_player(player)
     players << player
-    start
-    self.current_player = players[0]
   end
 
   def empty?
@@ -52,8 +53,24 @@ class Game
       deal
     end
   end
-end
 
-class CPU < Player
-  
+  def take_turn(asking_player, asked_player, rank)
+    asked_player.has_rank?(rank) ? player_takes_card(asking_player, asked_player, rank) : player_go_fish(asking_player, asked_player, rank)
+  end
+
+  def player_takes_card(asking_player, asked_player, rank)
+
+  end
+
+  def player_go_fish(asking_player, asked_player, rank)
+
+  end
+
+  def player_fished_asked_rank(rank)
+
+  end
+
+  def go_fish(player)
+
+  end
 end

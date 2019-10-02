@@ -24,21 +24,21 @@ section
     .your-matches
       - current_player.completed_matches.each do |card|
         img.card_image src="/images/card_faces/#{card.image_name}.jpg" alt="#{card.alt_to_s}"
-  - if current_player == game.current_player.name
-    a.turn-button href="#turn-button" Take Turn
-    .overlay id="#turn-button"
+  - if current_player.name == game.current_player.name
+    a.button href="#popup1" Click To Take Turn
+    div id="popup1" class="overlay"
       .popup
-        h3 Select Card & Player
+        h2 Select The Card & Player 
         a.close href="#" &times;
         .content
           form action="/ask" method="post"
             p Choose A Card To Ask For
             - current_player.unique_ranks.each do |rank|
-              .card-item.card-btn
-                input.card-list-item type="radio" name="rank" value="#{rank}"
-                button.card-list-item type="submit" name="rank" value="#{rank}"
-            p Choose a Player To Ask
-            - current_player.name != player.name
-              .player-list-item.player-btn
-                input.player-list-item type="radio" name="player" value="#{player.name}" #{player.name}
-                button.ask-btn type="submit" Ask 
+              .card-item.card-btn data-test-id="card-btn1"
+                input class="card-list-item" type="radio" name="rank" value="#{rank}" #{rank}
+            p Choose A Player To Ask
+            - game.players.each do |player|
+              - if game.current_player.name != player.name
+                .player-btn data-test-id="player-btn1"
+                  input class="player-list-item" type="radio" name="player" value="#{player.name}" #{player.name}
+            button class="ask-btn" type="submit" Ask

@@ -62,7 +62,6 @@ RSpec.describe Server do
     click_on '2'
     expect(page).to have_css(".your-hand")
     expect(page).to have_css(".your-matches")
-    expect(page).to have_css(".turn-button")
   end
 
   it 'displays a button that says it is your turn and they click in' do
@@ -70,5 +69,14 @@ RSpec.describe Server do
     click_on 'Take Turn'
     expect(page).to have_css(".card-list-item")
     expect(page).to have_css(".player-list-item")
+  end
+
+  it 'displays the result of the turn' do
+    start_game_with_two_cpus
+    click_on 'Take Turn'
+    click_on "data-test-id='card-btn1'"
+    click_on "data-test-id='player-btn1'"
+    expect(page).to_not have_css(".card-list-item")
+    expect(page).to_not have_css(".player-list-item")
   end
 end

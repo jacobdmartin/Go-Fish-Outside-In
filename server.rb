@@ -40,8 +40,8 @@ class Server < Sinatra::Base
     player = Player.new('You')
     cpu_count = (params[:name]).to_i
     session[:current_player] = player.name
-    self.class.game.create_cpu(cpu_count)
     self.class.game.add_player(player)
+    self.class.game.create_cpu(cpu_count)
     redirect '/game'
   end
 
@@ -49,5 +49,12 @@ class Server < Sinatra::Base
     redirect '/' if self.class.game.empty?
     current_player = self.class.game.find_current_player(session[:current_player])
     slim :game, locals: {game: self.class.game, current_player: current_player}
+  end
+
+  post '/ask' do
+    asking_player = self.class.game.find_current_player(session[:current_player])
+    requested_rank = params[:rank]
+    asked_player = self.class.game.find_current_player(params[:player])
+    self.class.game.take_turn(asking_player, asked_player, requested_rank)
   end
 end
