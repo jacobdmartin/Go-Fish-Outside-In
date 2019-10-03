@@ -56,5 +56,6 @@ class Server < Sinatra::Base
     requested_rank = params[:rank]
     asked_player = self.class.game.find_current_player(params[:player])
     self.class.game.take_turn(asking_player, asked_player, requested_rank)
+    redirect '/game'
   end
 end

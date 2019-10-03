@@ -10,6 +10,7 @@ section
           - else
             = "#{player.name} #{player.hand.count}"
   .flex.flex-row.result_message
+    p = game.results
   .flex.flex-row.personal-stats
   .flex
     .your-hand-column
@@ -34,11 +35,13 @@ section
           form action="/ask" method="post"
             p Choose A Card To Ask For
             - current_player.unique_ranks.each do |rank|
-              .card-item.card-btn data-test-id="card-btn1"
-                input class="card-list-item" type="radio" name="rank" value="#{rank}" #{rank}
+              .flex.card-item.card-btn data-test-id="card-btn1"
+                input class="card-list-item" id="rank" type="radio" name="rank" value="#{rank}" #{rank}
             p Choose A Player To Ask
             - game.players.each do |player|
               - if game.current_player.name != player.name
-                .player-btn data-test-id="player-btn1"
-                  input class="player-list-item" type="radio" name="player" value="#{player.name}" #{player.name}
+                .flex.player-btn data-test-id="player-btn1"
+                  input class="player-list-item" type="radio" id="player" name="player" value="#{player.name}" #{player.name}
             button class="ask-btn" type="submit" Ask
+  - if game.current_player.name != "You"
+    - game.cpu_take_turn

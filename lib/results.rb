@@ -7,9 +7,9 @@ class Results
 
   def initialize(inquiring_player, inquired_player, rank)
     @player_results = 
-    { inquiring_player_take_rank_message: "#{inquiring_player.name} took a #{rank} from #{inquired_player.name}", 
-      inquired_player_no_rank_message: "#{inquiring_player.name} asked for a #{rank} from #{inquired_player.name} but had to Go Fish", 
-      inquiring_player_fished_rank: "#{inquiring_player.name} fished what they asked for, #{inquiring_player.name} take another turn" 
+    { take_message: "#{inquiring_player.name} took a #{rank} from #{inquired_player.name}", 
+      go_fish_message: "#{inquiring_player.name} asked for a #{rank} from #{inquired_player.name} but had to Go Fish", 
+      fished_asked_rank_message: "#{inquiring_player.name} fished what they asked for, #{inquiring_player.name} take another turn" 
     }
   end
 end
