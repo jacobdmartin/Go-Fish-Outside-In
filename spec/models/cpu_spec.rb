@@ -29,7 +29,8 @@ describe 'CPU' do
       create_game
       create_cpu(cpu1, cpu2)
       give_cpus_cards
-      expect(@game.players[0].return_rank).to_not be_nil
+      rank = @game.players[0].return_rank
+      expect(rank).to_not be_nil
     end
   end
 
@@ -38,18 +39,8 @@ describe 'CPU' do
       create_game
       create_cpu(cpu1, cpu2)
       give_cpus_cards
-      @game.players[0].return_player
-    end
-  end
-
-  describe '#cpu_take_turn' do
-    it 'has a cpu take a turn' do
-      create_game
-      create_cpu(cpu1, cpu2)
-      give_cpus_cards
-      rank = @game.players[0].return_rank
       player = @game.players[0].return_player
-      @game.players[0].cpu_take_turn(@game.players[0], player, rank)
+      expect(player).to_not be_nil
     end
   end
 end

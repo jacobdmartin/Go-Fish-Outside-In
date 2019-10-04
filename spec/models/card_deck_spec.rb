@@ -27,4 +27,31 @@ describe 'CardDeck' do
       expect(deck.card_deck.count).to eq 52 
     end
   end
+
+  describe '#cards_left' do
+    let(:king_of_hearts) {PlayingCard.new("King", "Hearts")}
+    let(:ten_of_diamonds) {PlayingCard.new("10", "Diamonds")}
+    let(:king_of_spades) {PlayingCard.new("King", "Spades")}
+    let(:ten_of_clubs) {PlayingCard.new("10", "Clubs")}
+    let(:seven_of_hearts) {PlayingCard.new("7", "Hearts")}
+
+    def subtract_cards_from_deck(deck, card_number)
+      card_number.times do
+        lost_cards = deck.deal
+      end
+    end
+
+    it 'returns 5 because there are 5 cards left in the deck' do
+      deck = CardDeck.new
+      subtract_cards_from_deck(deck, 47)
+      expect(deck.cards_left).to eq 5
+    end
+
+
+    it 'returns 0 because there are 5 cards left in the deck' do
+      deck = CardDeck.new
+      subtract_cards_from_deck(deck, 52)
+      expect(deck.cards_left).to eq 0
+    end
+  end
 end

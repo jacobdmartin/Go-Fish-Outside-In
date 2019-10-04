@@ -65,6 +65,7 @@ class Game
     else
       player_go_fish(asking_player, asked_player, rank)
     end
+    return cpu_take_turn if current_player.bot? 
   end
 
   # private
@@ -80,6 +81,7 @@ class Game
   def player_go_fish(asking_player, asked_player, rank)
     result = Results.new(asking_player, asked_player, rank)
     new_card = go_fish(asking_player)
+    asking_player.count_matches
     output_message = player_fished_asked_rank(asking_player, asked_player, new_card, rank)
     self.results = output_message
   end
@@ -87,6 +89,7 @@ class Game
   def player_fished_asked_rank(asking_player, asked_player, new_card, rank)
     result = Results.new(asking_player, asked_player, rank)
     if new_card.rank == rank
+      self.current_player = asking_player
       result.player_results[:fished_asked_rank_message]
     else
       advance_player
@@ -103,7 +106,7 @@ class Game
   def advance_player
     if current_player == players.last
       self.current_player = players[0]
-    else 
+    else
       self.current_player = players[players.index(current_player) + 1]
     end
   end
@@ -117,5 +120,9 @@ class Game
     deck_size.times do
       player.add_cards_to_hand(card_deck.deal)
     end
+  end
+
+  def bot?
+    current_player != players[0] ? true : false
   end
 end

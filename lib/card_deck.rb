@@ -36,4 +36,8 @@ class CardDeck
   def suit
     suit = %w(Spades Hearts Diamonds Clubs)
   end
+
+  def cards_left
+    card_deck.count
+  end
 end

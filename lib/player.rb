@@ -1,3 +1,5 @@
+require_relative 'game'
+
 class Player
   attr_accessor :name, :hand, :completed_matches
 
@@ -46,5 +48,9 @@ class Player
     rank_arr = hand.select {|card| card.rank == asked_rank}
     hand.delete_if {|card| card.rank == asked_rank}
     rank_arr
+  end
+
+  def bot?
+    false
   end
 end

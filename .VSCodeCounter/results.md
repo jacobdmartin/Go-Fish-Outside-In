@@ -1,32 +1,32 @@
 # Summary
 
-Date : 2019-10-03 11:34:28
+Date : 2019-10-04 12:50:22
 
 Directory /Users/jacobmartin/Desktop/Academy/go-fish-app
 
-Total : 31 files,  1187 codes, 8 comments, 204 blanks, all 1399 lines
+Total : 31 files,  1317 codes, 22 comments, 233 blanks, all 1572 lines
 
 [details](details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| Ruby | 17 | 693 | 5 | 137 | 835 |
-| SCSS | 9 | 409 | 3 | 63 | 475 |
-| slim-lang | 3 | 69 | 0 | 1 | 70 |
+| Ruby | 17 | 786 | 19 | 161 | 966 |
+| SCSS | 9 | 442 | 3 | 68 | 513 |
+| slim-lang | 3 | 73 | 0 | 1 | 74 |
 | Gemfile | 1 | 16 | 0 | 2 | 18 |
 | Markdown | 1 | 0 | 0 | 1 | 1 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 31 | 1,187 | 8 | 204 | 1,399 |
-| assets | 9 | 409 | 3 | 63 | 475 |
-| assets/stylesheets | 9 | 409 | 3 | 63 | 475 |
-| lib | 6 | 219 | 2 | 47 | 268 |
-| spec | 8 | 421 | 3 | 78 | 502 |
-| spec/models | 7 | 350 | 3 | 67 | 420 |
-| spec/system | 1 | 71 | 0 | 11 | 82 |
-| views | 3 | 69 | 0 | 1 | 70 |
+| . | 31 | 1,317 | 22 | 233 | 1,572 |
+| assets | 9 | 442 | 3 | 68 | 513 |
+| assets/stylesheets | 9 | 442 | 3 | 68 | 513 |
+| lib | 6 | 245 | 2 | 53 | 300 |
+| spec | 8 | 487 | 7 | 94 | 588 |
+| spec/models | 7 | 424 | 3 | 82 | 509 |
+| spec/system | 1 | 63 | 4 | 12 | 79 |
+| views | 3 | 73 | 0 | 1 | 74 |
 
 [details](details.md)

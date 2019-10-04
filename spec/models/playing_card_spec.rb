@@ -24,6 +24,11 @@ describe 'PlayingCard' do
       ten_of_hearts = PlayingCard.new("10", "Hearts")
       expect(ten_of_hearts.image_name).to eq "10H"
     end
+
+    it 'returns the rank of 4 and the first letter of the cards suit' do
+      four_of_diamonds = PlayingCard.new("4", "Diamonds")
+      expect(four_of_diamonds.image_name).to eq "4D"
+    end
   end
 
   describe '#to_s' do

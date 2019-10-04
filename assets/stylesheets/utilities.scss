@@ -81,6 +81,16 @@ container {
   background-color: white;
 }
 
+.your-matches {
+  overflow: scroll;
+}
+
+.your-no-matches-column {
+  width: 100%;
+  background-color: white;
+  bottom: 0;
+}
+
 .personal-stats {
   margin-top: 10px;
 }

@@ -12,12 +12,16 @@ class CPU < Player
   
   def return_rank
     card = hand.sample
-    rank = card.rank
+    rank = card&.rank
     rank
   end
 
   def return_player
     asked_player = players.sample
     asked_player
+  end
+
+  def bot?
+    true
   end
 end

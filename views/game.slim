@@ -1,7 +1,7 @@
 section
   .flex.enter-header
     p.flex.enter-header-text Game
-  .flex.flex-row
+  .flex.flex-row.top-box
     ul.player-list
       - game.players.each do |player|
         li.flex.player__box.player__list--text data-test-id="player-bot1"
@@ -9,9 +9,17 @@ section
             b = "#{player.name} #{player.hand.count}"
           - else
             = "#{player.name} #{player.hand.count}"
+    .flex-row
+      p.matches-header = "Matches:"
+      .stats
+        - game.players.each do |player|
+          li.flex.player-stats 
+            = "#{player.name}: #{player.completed_matches.count}"
+        p.deck_stats = "Cards Left In Deck: #{game.card_deck.cards_left}"
+      - if current_player.name == game.current_player.name
+        a.button href="#popup1" Click To Take Turn
   .flex.flex-row.result_message
     p = game.results
-  .flex.flex-row.personal-stats
   .flex
     .your-hand-column
       p.your-info-header Your Cards
@@ -24,9 +32,7 @@ section
       p.your-info-header Your Matches
     .your-matches
       - current_player.completed_matches.each do |card|
-        img.card_image src="/images/card_faces/#{card.image_name}.jpg" alt="#{card.alt_to_s}"
-  - if current_player.name == game.current_player.name
-    a.button href="#popup1" Click To Take Turn
+        img.card_image src="/images/card_faces/#{card}H.jpg" alt="#{card.to_s}"
     div id="popup1" class="overlay"
       .popup
         h2 Select The Card & Player 
@@ -43,5 +49,3 @@ section
                 .flex.player-btn data-test-id="player-btn1"
                   input class="player-list-item" type="radio" id="player" name="player" value="#{player.name}" #{player.name}
             button class="ask-btn" type="submit" Ask
-  - if game.current_player.name != "You"
-    - game.cpu_take_turn

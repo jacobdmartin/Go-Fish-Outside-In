@@ -6,8 +6,21 @@ require 'pry'
 require_relative 'lib/game'
 require_relative 'lib/player'
 require_relative 'sinatra-pusher'
+require 'pusher'
 
 class Server < Sinatra::Base
+
+  # channels_client = Pusher::Client.new(
+  # app_id: '874073',
+  # key: '356a86fa22a4c249ad9a',
+  # secret: '5493e22b8a1f9abcc830',
+  # cluster: 'us2',
+  # encrypted: true
+  # )
+
+  # channels_client.trigger('my-channel', 'my-event', {
+  #   message: 'hello world'
+  # })
 
   configure :development do 
     register Sinatra::Reloader

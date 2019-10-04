@@ -71,12 +71,9 @@ RSpec.describe Server do
     expect(page).to have_css(".player-list-item")
   end
 
-  it 'displays the result of the turn' do
-    start_game_with_two_cpus
-    click_on 'Take Turn'
-    click_on "data-test-id='card-btn1'"
-    click_on "data-test-id='player-btn1'"
-    expect(page).to_not have_css(".card-list-item")
-    expect(page).to_not have_css(".player-list-item")
-  end
+  # it 'puts a match in a players match pile' do
+  #   start_game_with_two_cpus
+  #   click_on 'Take Turn'
+
+  # end
 end

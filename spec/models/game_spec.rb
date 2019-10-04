@@ -1,6 +1,7 @@
 require_relative '../../lib/game'
 require_relative '../../lib/player'
 require_relative '../../lib/card_deck'
+require_relative '../../lib/cpu'
 
 describe 'Game' do
   let(:player_bob) {Player.new("Bob")}
@@ -120,29 +121,25 @@ describe 'Game' do
   end
 
   describe '#cpu_take_turn' do
-    let(:cpu1) {CPU.new(@game.players, "CPU 1")}
-    let(:cpu2) {CPU.new(@game.players, "CPU 2")}
+    let(:player1) {Player.new("Jimmy")}
 
     let(:ace_of_diamonds) {PlayingCard.new("Ace", "Diamonds")}
     let(:king_of_spades) {PlayingCard.new("King", "Spades")}
     let(:eight_of_clubs) {PlayingCard.new("8", "Clubs")}
 
-    def create_cpu(*cpu)
-      cpu.each {|cpu| @game.players << cpu}
+    def give_players_cards
+      @game.players[0].hand = [ace_of_diamonds, king_of_spades]
+      @game.players[1].hand = [eight_of_clubs]
+      @game.players[2].hand = []
     end
 
-    def give_cpus_cards
-      cpu1.add_cards_to_hand(ace_of_diamonds, king_of_spades)
-      cpu2.add_cards_to_hand(eight_of_clubs)
-    end
-
-    it 'returns the asking_player the asked_player and the rank the cpu gave' do
+    it 'has the bot take a turn' do
       @game = Game.new
-      create_cpu(cpu1, cpu2)
-      give_cpus_cards
-      @game.current_player = cpu1
-      @game.cpu_take_turn
-      expect(@game.players[0].hand).to eq 3 
+      @game.add_player(player1)
+      @game.create_cpu(2)
+      give_players_cards
+      @game.take_turn(@game.players[0], @game.players[1], ace_of_diamonds.rank)
+      expect(@game.players[0].hand.count).to be > 2
     end
   end
 
@@ -175,6 +172,7 @@ describe 'Game' do
 
     context 'other player has the rank asked for' do
       it 'gives the player the card from the other player' do
+        game.current_player = jonathan
         game.take_turn(jonathan, natalie, king_of_hearts.rank)
         expect(jonathan.hand).to include(king_of_spades)
       end
@@ -258,6 +256,32 @@ describe 'Game' do
         deck_size = game.deck_size(deck_with_no_cards, david)
         expect(david.hand.count).to eq 0
       end
+    end
+  end
+
+  describe '#bot?' do
+    let(:cpu1) {CPU.new(@game.players, "CPU 1")}
+    let(:player1) {Player.new("Audrey")}
+
+    def create_game
+      @game = Game.new
+    end
+
+    it 'returns true if the player is a bot' do
+      create_game
+      @game.add_player(player1)
+      @game.add_player(cpu1)
+      @game.current_player = @game.players[0]
+      @game.advance_player
+      expect(@game.bot?).to eq true
+    end
+
+    it 'returns false if the player is not a bot' do
+      create_game
+      @game.add_player(player1)
+      @game.add_player(cpu1)
+      @game.current_player = @game.players[0]
+      expect(@game.bot?).to eq false
     end
   end
 end
