@@ -4,14 +4,14 @@ require_relative 'cpu'
 require_relative 'results'
 
 class Game
-  attr_reader :card_deck
-  attr_accessor :players, :current_player, :started, :cpu_arr, :results
+  attr_accessor :players, :current_player, :started, :cpu_arr, :results, :card_deck
 
   def initialize
     @started = false
     @card_deck = CardDeck.new
     @players = []
     @current_player = nil
+    @results = []
   end
 
   def create_cpu(cpu_number)
@@ -65,7 +65,7 @@ class Game
     else
       player_go_fish(asking_player, asked_player, rank)
     end
-    return cpu_take_turn if current_player.bot? 
+    return cpu_take_turn if current_player.bot?
   end
 
   # private
@@ -75,15 +75,32 @@ class Game
     given_cards = asked_player.remove_cards_from_hand(rank)
     asking_player.add_players_cards_to_hand(given_cards)
     asking_player.count_matches
-    self.results = result.player_results[:take_message]
+    cards_left_for(asking_player)
+    results << result.player_results[:take_message]
+  end
+
+  def cards_left_for(player)
+    if player.no_cards? == true
+      if card_deck.cards_left > 0
+        if card_deck.cards_left >= 5
+          5.times {player.add_cards_to_hand(card_deck.deal)}
+        elsif card_deck.cards_left < 5
+          card_deck.cards_left.times {player.add_cards_to_hand(card_deck.deal)}
+        end
+      end
+    end
   end
 
   def player_go_fish(asking_player, asked_player, rank)
     result = Results.new(asking_player, asked_player, rank)
     new_card = go_fish(asking_player)
     asking_player.count_matches
-    output_message = player_fished_asked_rank(asking_player, asked_player, new_card, rank)
-    self.results = output_message
+    if new_card == nil
+      advance_player
+    else
+      output_message = player_fished_asked_rank(asking_player, asked_player, new_card, rank)
+      results << output_message
+    end
   end
 
   def player_fished_asked_rank(asking_player, asked_player, new_card, rank)
@@ -98,9 +115,11 @@ class Game
   end
 
   def go_fish(player)
-    new_card = card_deck.deal
-    player.add_cards_to_hand(new_card)
-    new_card
+    if card_deck.cards_left > 0
+      new_card = card_deck.deal
+      player.add_cards_to_hand(new_card)
+      new_card
+    end
   end
 
   def advance_player
@@ -108,17 +127,6 @@ class Game
       self.current_player = players[0]
     else
       self.current_player = players[players.index(current_player) + 1]
-    end
-  end
-
-  def deck_size(card_deck, player)
-    deck_size = card_deck.count
-    deck_size >= 5 ? deck_count(5, player) : deck_count(deck_size, player)
-  end
-
-  def deck_count(deck_size, player)
-    deck_size.times do
-      player.add_cards_to_hand(card_deck.deal)
     end
   end
 

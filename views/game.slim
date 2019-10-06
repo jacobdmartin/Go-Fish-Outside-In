@@ -18,8 +18,9 @@ section
         p.deck_stats = "Cards Left In Deck: #{game.card_deck.cards_left}"
       - if current_player.name == game.current_player.name
         a.button href="#popup1" Click To Take Turn
-  .flex.flex-row.result_message
-    p = game.results
+  .result_message
+    - game&.results.each do |message|
+      p = message
   .flex
     .your-hand-column
       p.your-info-header Your Cards
@@ -30,9 +31,10 @@ section
   .flex
     .your-matches-column
       p.your-info-header Your Matches
+  .flex
     .your-matches
       - current_player.completed_matches.each do |card|
-        img.card_image src="/images/card_faces/#{card}H.jpg" alt="#{card.to_s}"
+        img.card_image src="/images/card_faces/#{card[0]}H.jpg" alt="#{card.to_s}"
     div id="popup1" class="overlay"
       .popup
         h2 Select The Card & Player 

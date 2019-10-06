@@ -26,9 +26,15 @@ class Player
   end
 
   def count_matches
-    number_of_ranks = Hash.new(0)
-    hand.each {|card| number_of_ranks[card.rank] += 1}
-    number_of_ranks.each {|rank, cards| add_book(rank) if cards == 4}
+    if no_cards? == false
+      number_of_ranks = Hash.new(0)
+      hand.each {|card| number_of_ranks[card.rank] += 1}
+      number_of_ranks.each {|rank, cards| add_book(rank) if cards == 4}
+    end
+  end
+
+  def no_cards?
+    hand.count == 0 ? true : false
   end
 
   # private
