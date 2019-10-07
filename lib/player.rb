@@ -29,7 +29,12 @@ class Player
     if no_cards? == false
       number_of_ranks = Hash.new(0)
       hand.each {|card| number_of_ranks[card.rank] += 1}
-      number_of_ranks.each {|rank, cards| add_book(rank) if cards == 4}
+      number_of_ranks.each do |rank, cards| 
+        if cards == 4
+          matches = add_book(rank)
+          true
+        end
+      end
     end
   end
 

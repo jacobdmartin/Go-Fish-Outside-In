@@ -241,6 +241,16 @@ describe 'Game' do
         expect(@game1.players[0].hand.count).to eq 0
       end
 
+      it 'player has a match and match_num is increased to 13 because the game is over' do
+        create_and_start_game_with_one_cpu
+        @game1.players[0].hand = [five_of_clubs, five_of_diamonds, five_of_hearts]
+        @game1.players[1].hand = [five_of_spades]
+        @game1.card_deck.card_deck = []
+        @game1.take_turn(@game1.players[0], @game1.players[1], five_of_clubs.rank)
+        expect(@game1.players[0].completed_matches.count).to eq 1
+        expect(@game1.match_num).to eq 13
+      end
+
       it 'the card deck has no cards left, so the current player is advanced' do
         create_and_start_game_with_one_cpu
         @game1.players[0].hand = [five_of_clubs, five_of_diamonds, five_of_hearts]

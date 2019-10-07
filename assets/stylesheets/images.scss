@@ -1,6 +1,11 @@
 .card_image {
   max-width: 15%;
   border-radius: 7px;
+  margin-left: -60px;
+}
+
+.card_image:first-child {
+  margin-left: 0;
 }
 
 .card-img {

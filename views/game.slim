@@ -51,3 +51,15 @@ section
                 .flex.player-btn data-test-id="player-btn1"
                   input class="player-list-item" type="radio" id="player" name="player" value="#{player.name}" #{player.name}
             button class="ask-btn" type="submit" Ask
+  - if game.match_num == 13
+    div id="winscreen" class="win-overlay"
+      .win-popup
+        h2 Game Scores
+        a.close href="#" &times;
+        .win-content
+          - game.players.each do |player|
+            p "#{player.name} #{player.completed_matches}"
+          form action="/leave" method="post"
+            button class="leave-game-btn" type="submit" Leave Game
+          form action="/new" method="post"
+            button class="enter-game-btn" type="submit" Start New Game

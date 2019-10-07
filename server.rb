@@ -71,4 +71,12 @@ class Server < Sinatra::Base
     self.class.game.take_turn(asking_player, asked_player, requested_rank)
     redirect '/game'
   end
+
+  post '/leave' do
+    redirect '/'
+  end
+
+  post '/new' do
+    redirect '/game'
+  end
 end

@@ -3,7 +3,7 @@ require_relative 'game'
 class CPU < Player
   attr_reader :players, :name
 
-  def initialize(players = nil, name)
+  def initialize(players, name)
     @players = players
     @name = name
     @hand = []
